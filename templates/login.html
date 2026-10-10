@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log in | Security Awareness Demo</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #121212;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 65px;
+            padding: 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            min-width: 120px;
+        }
+
+        /* EMPLACEMENT DU LOGO DE LABORATOIRE */
+
+        .brand-image {
+            width: 120px;
+            max-height: 45px;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .help {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* MAIN */
+
+        main {
+            width: 375px;
+            max-width: calc(100% - 32px);
+            margin: 62px auto 0;
+            flex: 1;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 26px;
+        }
+
+        .simulation {
+            text-align: center;
+            color: #25f4ee;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            font-size: 13px;
+        }
+
+        .row strong {
+            font-size: 14px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .row a {
+            font-size: 12px;
+        }
+
+        /* INPUTS */
+
+        .field {
+            height: 46px;
+            width: 100%;
+            min-width: 0;
+            background: #2f2f2f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: white;
+            padding: 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .field::placeholder {
+            color: #858585;
+        }
+
+        .field:focus {
+            border-color: #888;
+        }
+
+        /* USERNAME */
+
+        .username-row {
+            margin-bottom: 9px;
+        }
+
+        /* PASSWORD */
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            height: 46px;
+            padding: 12px 48px 12px 13px;
+            background: #2f2f2f;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .password-wrapper input::placeholder {
+            color: #858585;
+        }
+
+        .password-wrapper input:focus {
+            border-color: #888;
+        }
+
+        /* EYE ICON */
+
+        .toggle-password {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #858585;
+            cursor: pointer;
+        }
+
+        .toggle-password:hover {
+            color: white;
+        }
+
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* LINKS */
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 12px;
+        }
+
+        .links span {
+            color: #555;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-button {
+            width: 100%;
+            height: 46px;
+            background: #fe2c55;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #e6254d;
+        }
+
+        /* DEMO ACCOUNT */
+
+        .demo-account {
+            margin-top: 22px;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* BACK */
+
+        .back {
+            margin-top: 42px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 55px;
+            border-top: 1px solid #303030;
+        }
+
+        .signup {
+            text-align: center;
+            padding: 24px 10px;
+            font-size: 14px;
+        }
+
+        .signup span {
+            color: #fe2c55;
+        }
+
+        .footer-bottom {
+            min-height: 80px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            padding: 12px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .language {
+            background: transparent;
+            color: white;
+            border: 1px solid #777;
+            padding: 10px 16px;
+            width: 172px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 500px) {
+            header {
+                padding: 0 12px;
+            }
+
+            .brand-image {
+                width: 105px;
+            }
+
+            .help {
+                font-size: 12px;
+            }
+
+            main {
+                margin-top: 40px;
+            }
+
+            .footer-bottom {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <!-- IMAGE DU LOGO DE DEMONSTRATION -->
+        <div class="brand">
+
+            <img
+                src="{{ url_for('static', filename='logo.png') }}"
+                alt="Logo de démonstration"
+                class="brand-image"
+            >
+
+        </div>
+
+        <a class="help" href="#" onclick="return false;">
+            ⓘ Feedback and help
+        </a>
+
+    </header>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <h1>Log in</h1>
+
+        
+
+        <div class="row">
+            <strong>Email or username</strong>
+            <span>Log in with phone</span>
+        </div>
+
+        <!-- LOGIN FORM -->
+
+        <form action="/login" method="POST">
+
+            <!-- USERNAME -->
+
+            <div class="username-row">
+
+                <input
+                    class="field"
+                    type="text"
+                    name="username"
+                    placeholder=" username"
+                    autocomplete="off"
+                    required
+                >
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="password-wrapper">
+
+                <input
+                    class="field"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder=" password"
+                    autocomplete="off"
+                    required
+                >
+
+                <!-- EYE ICON -->
+
+                <button
+                    class="toggle-password"
+                    type="button"
+                    onclick="togglePassword()"
+                    aria-label="Show or hide password"
+                >
+
+                    <svg
+                        id="eye-icon"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+
+                        <path d="M3 3L21 21"/>
+
+                        <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5
+                                 c5.5 0 9.5 7 9.5 7
+                                 a15 15 0 0 1-3.2 3.8"/>
+
+                        <path d="M6.1 6.1C3.8 7.5 2.5 10 2.5 12
+                                 c0 0 4 7 9.5 7
+                                 a9.7 9.7 0 0 0 4.1-.9"/>
+
+                        <path d="M10 10a2.8 2.8 0 0 0 4 4"/>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <!-- LINKS -->
+
+            <div class="links">
+
+                <a href="#" onclick="return false;">
+                    Forgot password?
+                </a>
+
+                <span>|</span>
+
+                <a href="#" onclick="return false;">
+                    Log in with code
+                </a>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button class="login-button" type="submit">
+                Log in
+            </button>
+
+        </form>
+
+        <!-- DEMO CREDENTIALS -->
+
+       
+        <!-- BACK -->
+
+        <div class="back">
+            <a href="/">
+                ‹ Go back
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="signup">
+            Don’t have an account?
+            <span> · Sign up</span>
+        </div>
+
+        <div class="footer-bottom">
+
+            <select class="language" aria-label="Language">
+                <option>English (US)</option>
+                <option>Français</option>
+            </select>
+
+            <span>
+                © 2026 TikTok
+            </span>
+
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function togglePassword() {
+
+            const input = document.getElementById("password");
+            const icon = document.getElementById("eye-icon");
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.innerHTML = `
+                    <path d="M2.5 12S6.5 5 12 5s9.5 7 9.5 7-4 7-9.5 7S2.5 12 2.5 12Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                `;
+
+            } else {
+
+                input.type = "password";
+
+                icon.innerHTML = `
+                    <path d="M3 3L21 21"/>
+                    <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c5.5 0 9.5 7 9.5 7a15 15 0 0 1-3.2 3.8"/>
+                    <path d="M6.1 6.1C3.8 7.5 2.5 10 2.5 12c0 0 4 7 9.5 7a9.7 9.7 0 0 0 4.1-.9"/>
+                    <path d="M10 10a2.8 2.8 0 0 0 4 4"/>
+                `;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

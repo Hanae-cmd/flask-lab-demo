@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidéo de sensibilisation</title>
+    <style>
+        body {
+            margin: 0;
+            background: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #25f4ee;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 360px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #858585;
+            text-align: center;
+            max-width: 400px;
+            padding: 0 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Sensibilisation à la sécurité</h2>
+
+    <!-- La vidéo lue depuis le dossier static -->
+    <video controls autoplay>
+        <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+        Votre navigateur ne prend pas en charge la lecture de vidéos.
+    </video>
+
+    <div class="note">
+        Ceci est une simulation de démonstration. Aucune information sensible n'a été partagée.
+    </div>
+
+</body>
+</html>
